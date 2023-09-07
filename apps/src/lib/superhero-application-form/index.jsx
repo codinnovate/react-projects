@@ -82,6 +82,9 @@ function handlePowersChange({target:{value, checked}}){
             </label>
           ))}
         </label>
+        <button className="submit-btn" type="submit"> 
+        Join the League
+        </button> 
       </form>
     </div>
   );
