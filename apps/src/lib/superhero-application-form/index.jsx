@@ -82,7 +82,11 @@ function handlePowersChange({target:{value, checked}}){
             </label>
           ))}
         </label>
-        <button className="submit-btn" type="submit"> 
+        <button 
+        className="submit-btn" 
+        type="submit"
+        disabled={(!heroName || !realName || !powerSource || powers.length === 0 )? true : false}
+        > 
         Join the League
         </button> 
       </form>
