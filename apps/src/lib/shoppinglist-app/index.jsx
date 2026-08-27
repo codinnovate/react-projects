@@ -1,3 +1,5 @@
+import { useCallback } from "react";
+
 const { useState } = React;
 
 const items = [
@@ -17,15 +19,18 @@ export const ShoppingList = () => {
   const [query, setQuery] = useState("");
   const [selectedItems, setSelectedItems] = useState([]);
 
-  const filteredItems = items.filter((item) => 
-    item.toLowerCase().includes(query.toLowerCase())
-  );
-
-  const toggleItem = (item) => {
-    setSelectedItems((prev) =>
-      prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
+  const filteredItems = useMemo(() => {
+    return items.filter((item) => 
+      item.toLowerCase().includes(query.toLowerCase())
     );
-  };
+  }, [query])
+
+  const toggleItem = useCallback((item) => {
+      setSelectedItems((prev) =>
+        prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
+      );
+
+  }, [setSelectedItems])
 
   return (
     <div className="container">
@@ -53,6 +58,7 @@ export const ShoppingList = () => {
                   <input
                     type="checkbox"
                     onChange={() => toggleItem(item)}
+                    checked={isChecked ? true : false}
                     
                   />
                   {item}
